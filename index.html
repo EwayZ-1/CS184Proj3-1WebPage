@@ -44,9 +44,7 @@
 <h2 align="middle">Tinna Liu, Yiwei Zhou</h2>
 
 <!-- Add Website URL -->
-<h2 align="middle">Website URL: <a href="https://ewayz-1.github.io/CS184Proj3-1WebPage/
-    ">https://ewayz-1.github.io/CS184Proj3-1WebPage/
-</a></h2>
+<h2 align="middle">Website URL: <a href="https://ewayz-1.github.io/CS184Proj3-1WebPage/">https://ewayz-1.github.io/CS184Proj3-1WebPage/</a></h2>
 
 <br><br>
 
@@ -170,11 +168,11 @@ Compare rendering times on a few scenes with moderately complex geometries with 
       Finally we assign the returned nodes to be the left and right of the current BVHNode. 
     </li>
     <li>
-      Heuristic for splitting: we splitted on the the midpoint of either the x, y, or z axis. To choose which axis to split on, 
-      for each of x, y, and z, we counted the number of primitives whose centroid lies to the "left" of the midpoint's x, y, or z. 
-      We picked the axis that divides most evenly (so that the left_count is the closest to half of the total number of primitives).
-      If it happened so that there are zero primitives on one side of the split, we would assign the first half of the sorted 
-      primitives to the left tree and the second half to the right tree. 
+      Heuristic for splitting: we split on the axis that has the longest bounding box extent. On that axis, we split the primitives into
+      two groups according to their centroid's location on that axis. For example, if we decide to split on the x-axis and the 
+      primitive's centroid.x is smaller than the centroid.x of the bounding box, we would assign this primitive to the left group; 
+      otherwise, we would assign it to the right group. If it happened so that all of the primitives were assigned to one group, 
+      we would force the last primitive in the sorted list to be assigned to the other group.
     </li>
   </ul>
    
@@ -557,7 +555,7 @@ Pick one scene and render it with at least 2048 samples per pixel. Show a good s
     <tr align="center">
       <td>
         <img src="images/part5-1.png" align="middle" width="400px"/>
-        <figcaption>Rendered image (CBbunny.dae)</figcaption> 
+        <figcaption>Rendered image (CBbunny.dae)</figcaption>
       </td>
       <td>
         <img src="images/part5-2.png" align="middle" width="400px"/>
